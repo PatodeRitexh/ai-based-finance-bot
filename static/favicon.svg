@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="10" fill="#0f172a" />
+  <rect x="3" y="3" width="58" height="58" rx="8" fill="none" stroke="#10b981" stroke-width="2" stroke-opacity="0.4"/>
+  <!-- Rupee Symbol glyph in clean geometric paths -->
+  <path d="M 22 18 L 42 18" stroke="#10b981" stroke-width="4" stroke-linecap="round" />
+  <path d="M 22 26 L 38 26" stroke="#10b981" stroke-width="4" stroke-linecap="round" />
+  <path d="M 28 18 L 28 46" stroke="#ffffff" stroke-width="4" stroke-linecap="round" />
+  <path d="M 28 26 C 36 26 38 34 28 36" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" />
+  <path d="M 27 36 L 40 48" stroke="#10b981" stroke-width="4" stroke-linecap="round" />
+</svg>

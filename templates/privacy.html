@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy - Personal Finance Advisor Bot{% endblock %}
+
+{% block content %}
+<div style="min-height: 100vh; display: flex; flex-direction: column; background-color: #f8fafc;">
+  
+  <!-- Header -->
+  <header style="background-color: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 0.85rem 2rem;">
+    <div style="max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+      <a href="/" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none;">
+        <img src="{{ url_for('static', filename='favicon.svg') }}" alt="Logo" style="width: 28px; height: 28px;">
+        <span style="font-weight: 700; font-size: 0.95rem; color: #0f172a;">Personal Finance Advisor Bot</span>
+      </a>
+      <a href="/dashboard" class="btn btn-secondary btn-sm">Return to Dashboard</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main style="max-width: 900px; margin: 2rem auto; padding: 0 1.5rem; flex: 1;">
+    <div class="card-box" style="padding: 2.5rem 2rem;">
+      <h1 style="font-size: 1.75rem; margin-bottom: 0.5rem; color: #0f172a;">Privacy Policy</h1>
+      <p style="font-size: 0.825rem; color: #64748b; margin-bottom: 2rem;">Effective Date: January 1, 2026 | Self-Hosted Architecture</p>
+
+      <div style="display: flex; flex-direction: column; gap: 1.5rem; font-size: 0.9rem; line-height: 1.6; color: #334155;">
+        
+        <section>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.5rem;">1. Architecture & Data Ownership</h3>
+          <p>
+            Personal Finance Advisor Bot is built as a self-hosted application. All financial records, income entries, expense itemizations, budget limits, and savings goals are stored locally in your SQLite instance database. The application does not transmit your personal financial ledger to external telemetry servers.
+          </p>
+        </section>
+
+        <section>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.5rem;">2. Information We Store</h3>
+          <p>The application persists the following data points locally:</p>
+          <ul style="padding-left: 1.25rem; margin-top: 0.5rem; color: #475569;">
+            <li>User account identity: Name, email address, and cryptographically salted password hashes.</li>
+            <li>Income records: Source name, numeric amount (INR), transaction date, and optional user notes.</li>
+            <li>Expense records: Category tags, numeric amount (INR), date, and optional item descriptions.</li>
+            <li>Budget planning: Category spending caps and monthly tracking periods.</li>
+            <li>Savings goals: Milestone titles, target amounts, current accumulated sums, and deadline dates.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.5rem;">3. Google Gemini AI Processing</h3>
+          <p>
+            When you explicitly choose to run the "AI Advisor" feature, the backend aggregates your current month's numerical figures (total income, total expense, category percentages, budget variances) and transmits them to the Google Gemini API using the API key configured in your local environment.
+          </p>
+          <p style="margin-top: 0.5rem;">
+            No bank account numbers, credentials, credit card numbers, or permanent identifiers are processed by or sent to the Gemini API. You control the API key and can revoke it at any time through Google AI Studio.
+          </p>
+        </section>
+
+        <section>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.5rem;">4. Passwords and Authentication</h3>
+          <p>
+            All passwords are salted and hashed using standard PBKDF2 / SHA-256 algorithms via Werkzeug security primitives. Plaintext passwords are never logged, stored, or exposed via API endpoints.
+          </p>
+        </section>
+
+        <section>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.5rem;">5. Data Retention and Deletion</h3>
+          <p>
+            Because the database is self-hosted on your machine or private server, you retain full rights over data lifecycle. Deleting an income, expense, budget, or goal immediately purges the record from the database. Removing the SQLite file permanently clears all records.
+          </p>
+        </section>
+
+        <section>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.5rem;">6. Disclaimer</h3>
+          <p>
+            AI-generated insights are provided solely for personal budgeting awareness. They do not constitute certified financial, tax, or investment advisory.
+          </p>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer style="background-color: #0f172a; color: #94a3b8; padding: 1.5rem 2rem; font-size: 0.8rem; text-align: center;">
+    <div>Personal Finance Advisor Bot | Self-Hosted System</div>
+  </footer>
+
+</div>
+{% endblock %}

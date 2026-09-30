@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Terms & Conditions - Personal Finance Advisor Bot{% endblock %}
+
+{% block content %}
+<div style="min-height: 100vh; display: flex; flex-direction: column; background-color: #f8fafc;">
+  
+  <!-- Header -->
+  <header style="background-color: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 0.85rem 2rem;">
+    <div style="max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+      <a href="/" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none;">
+        <img src="{{ url_for('static', filename='favicon.svg') }}" alt="Logo" style="width: 28px; height: 28px;">
+        <span style="font-weight: 700; font-size: 0.95rem; color: #0f172a;">Personal Finance Advisor Bot</span>
+      </a>
+      <a href="/dashboard" class="btn btn-secondary btn-sm">Return to Dashboard</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main style="max-width: 900px; margin: 2rem auto; padding: 0 1.5rem; flex: 1;">
+    <div class="card-box" style="padding: 2.5rem 2rem;">
+      <h1 style="font-size: 1.75rem; margin-bottom: 0.5rem; color: #0f172a;">Terms & Conditions</h1>
+      <p style="font-size: 0.825rem; color: #64748b; margin-bottom: 2rem;">Effective Date: January 1, 2026 | User Terms of Service</p>
+
+      <div style="display: flex; flex-direction: column; gap: 1.5rem; font-size: 0.9rem; line-height: 1.6; color: #334155;">
+        
+        <section>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.5rem;">1. Acceptance of Terms</h3>
+          <p>
+            By accessing or operating this instance of the Personal Finance Advisor Bot, you acknowledge and agree to abide by these terms. If you do not agree with any condition outlined herein, do not use the software.
+          </p>
+        </section>
+
+        <section>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.5rem;">2. Software Purpose & Non-Advisory Status</h3>
+          <p>
+            The software is provided strictly for educational, personal bookkeeping, and budget planning purposes. 
+          </p>
+          <p style="margin-top: 0.5rem; font-weight: 500; color: #0f172a;">
+            The application is not a registered investment advisor, broker, dealer, or certified financial planner.
+          </p>
+          <p style="margin-top: 0.5rem;">
+            Outputs from the Gemini AI module or mathematical calculations do not constitute professional tax, legal, or investment advice. You bear sole responsibility for any financial decisions, purchases, or investments you undertake.
+          </p>
+        </section>
+
+        <section>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.5rem;">3. No Automated Trading or Financial Transactions</h3>
+          <p>
+            The software does not initiate wire transfers, execute stock trades, link to bank payment gateways, or manage custodial funds. All data is user-entered bookkeeping information.
+          </p>
+        </section>
+
+        <section>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.5rem;">4. User Responsibilities & API Key Security</h3>
+          <p>
+            You are responsible for safeguarding your deployment environment, local database credentials, and any third-party API keys (including Google Gemini API keys). You agree not to commit confidential API keys to public source control repositories.
+          </p>
+        </section>
+
+        <section>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.5rem;">5. Disclaimer of Warranties</h3>
+          <p>
+            The software is delivered "as is" and "as available" without warranty of any kind, express or implied. The authors and maintainers do not warrant that calculations will be error-free or that external AI services will operate uninterrupted.
+          </p>
+        </section>
+
+        <section>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.5rem;">6. Modifications</h3>
+          <p>
+            The software may be updated or modified as project requirements evolve. Continued deployment or use signifies agreement with updated terms.
+          </p>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer style="background-color: #0f172a; color: #94a3b8; padding: 1.5rem 2rem; font-size: 0.8rem; text-align: center;">
+    <div>Personal Finance Advisor Bot | Self-Hosted System</div>
+  </footer>
+
+</div>
+{% endblock %}

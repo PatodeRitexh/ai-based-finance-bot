@@ -1,0 +1,743 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Personal Finance Advisor Bot{% endblock %}
+
+{% block content %}
+<div class="app-shell">
+
+  <!-- Sidebar -->
+  <aside class="app-sidebar">
+    <div class="sidebar-header">
+      <div class="brand-wrapper">
+        <img src="{{ url_for('static', filename='favicon.svg') }}" alt="Logo" class="brand-icon">
+        <div>
+          <div class="brand-title">Finance Advisor</div>
+          <div class="brand-sub">INR Ledger Engine</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#dashboard" class="nav-link active" data-tab="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <rect x="3" y="3" width="7" height="9" rx="1"/>
+          <rect x="14" y="3" width="7" height="5" rx="1"/>
+          <rect x="14" y="12" width="7" height="9" rx="1"/>
+          <rect x="3" y="16" width="7" height="5" rx="1"/>
+        </svg>
+        Dashboard
+      </a>
+
+      <a href="#income" class="nav-link" data-tab="income">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+        </svg>
+        Income
+      </a>
+
+      <a href="#expenses" class="nav-link" data-tab="expenses">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+          <rect x="8" y="2" width="8" height="4" rx="1"/>
+          <path d="M9 14l2 2 4-4"/>
+        </svg>
+        Expenses
+      </a>
+
+      <a href="#budgets" class="nav-link" data-tab="budgets">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M3 3v18h18"/>
+          <path d="M18 17V9"/>
+          <path d="M13 17V5"/>
+          <path d="M8 17v-3"/>
+        </svg>
+        Budget
+      </a>
+
+      <a href="#goals" class="nav-link" data-tab="goals">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="12" cy="12" r="10"/>
+          <circle cx="12" cy="12" r="6"/>
+          <circle cx="12" cy="12" r="2"/>
+        </svg>
+        Savings Goals
+      </a>
+
+      <a href="#ai-advisor" class="nav-link" data-tab="ai-advisor">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <rect x="4" y="4" width="16" height="16" rx="2"/>
+          <rect x="9" y="9" width="2" height="2"/>
+          <rect x="13" y="9" width="2" height="2"/>
+          <path d="M9 15h6"/>
+        </svg>
+        AI Advisor
+      </a>
+
+      <a href="#settings" class="nav-link" data-tab="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        Settings
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-badge">
+        <div class="user-info">
+          <div class="user-name">{{ user_name }}</div>
+          <div class="user-role">Local Ledger Active</div>
+        </div>
+        <a href="/logout" class="btn-icon" title="Sign Out">
+          <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>
+          </svg>
+        </a>
+      </div>
+      <div style="font-size: 0.675rem; color: #64748b; font-family: monospace;">
+        INR Edition v1.0
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="app-main">
+    
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <div class="top-bar-title">
+        <h2 id="page-title-text">Financial Overview</h2>
+        <span class="status-chip active">INR (₹)</span>
+      </div>
+
+      <div class="top-bar-actions">
+        <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: #64748b;">
+          <span>Month:</span>
+          <input type="month" id="global-month-picker" class="form-control" style="width: auto; padding: 0.35rem 0.6rem; font-size: 0.8rem;">
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="openAddIncomeModal()">+ Income</button>
+        <button class="btn btn-primary btn-sm" onclick="openAddExpenseModal()">+ Expense</button>
+      </div>
+    </header>
+
+    <!-- Content Body -->
+    <div class="content-body">
+
+      <!-- ===================================================================
+           TAB 1: DASHBOARD OVERVIEW
+           =================================================================== -->
+      <section id="view-dashboard" class="tab-view active">
+        
+        <!-- Metrics Grid -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-label">Monthly Income</span>
+              <div class="metric-icon-wrap text-positive">
+                <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+              </div>
+            </div>
+            <div id="metric-total-income" class="metric-value">₹0.00</div>
+            <div class="metric-sub">Recorded salary & revenues</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-label">Monthly Expenses</span>
+              <div class="metric-icon-wrap text-negative">
+                <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+              </div>
+            </div>
+            <div id="metric-total-expenses" class="metric-value">₹0.00</div>
+            <div class="metric-sub">Total itemized spend</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-label">Net Savings</span>
+              <div class="metric-icon-wrap">
+                <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+              </div>
+            </div>
+            <div id="metric-net-savings" class="metric-value">₹0.00</div>
+            <div id="metric-savings-pct" class="metric-sub">0.0% of income</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-label">Remaining Budget</span>
+              <div class="metric-icon-wrap">
+                <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/></svg>
+              </div>
+            </div>
+            <div id="metric-budget-remaining" class="metric-value">₹0.00</div>
+            <div class="metric-sub">Unspent budget pool</div>
+          </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="dashboard-grid-2">
+          <!-- Expense by Category Doughnut -->
+          <div class="card-box" style="margin-bottom: 0;">
+            <div class="card-box-header">
+              <h3>Expense by Category</h3>
+              <button class="btn btn-secondary btn-sm" onclick="switchTab('expenses')">Manage Expenses</button>
+            </div>
+            <div class="card-box-body" style="height: 290px; position: relative;">
+              <canvas id="chart-category-breakdown"></canvas>
+            </div>
+          </div>
+
+          <!-- Monthly Trend Bar Chart -->
+          <div class="card-box" style="margin-bottom: 0;">
+            <div class="card-box-header">
+              <h3>6-Month Cash Flow Trend</h3>
+              <span style="font-size: 0.75rem; color: #64748b;">Income vs Expenses</span>
+            </div>
+            <div class="card-box-body" style="height: 290px; position: relative;">
+              <canvas id="chart-monthly-trend"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Grid: Recent Transactions & AI Teaser -->
+        <div class="dashboard-grid-2" style="margin-top: 1.5rem;">
+          <!-- Recent Transactions -->
+          <div class="card-box" style="margin-bottom: 0;">
+            <div class="card-box-header">
+              <h3>Recent Ledger Transactions</h3>
+              <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn-secondary btn-sm" onclick="switchTab('income')">All Income</button>
+                <button class="btn btn-secondary btn-sm" onclick="switchTab('expenses')">All Expenses</button>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="finance-table">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th style="text-align: right;">Amount</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-recent-transactions-tbody">
+                  <!-- Populated via dashboard.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- AI Financial Advisor Teaser Card -->
+          <div class="card-box" style="margin-bottom: 0; display: flex; flex-direction: column;">
+            <div class="card-box-header" style="background-color: #0f172a; color: #ffffff;">
+              <h3 style="color: #ffffff;">Gemini Financial Advisor</h3>
+              <span class="badge" style="background-color: #1e293b; color: #10b981; border: 1px solid #334155;">Active</span>
+            </div>
+            <div class="card-box-body" style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <p id="dashboard-ai-summary-text" style="font-size: 0.875rem; line-height: 1.6; color: #334155; margin-bottom: 1rem;">
+                  Loading summary...
+                </p>
+                <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 0.75rem; font-size: 0.775rem; color: #64748b;">
+                  Provides: Spending insights, overspending identification, budget optimization recommendations, and unnecessary expense reduction tips.
+                </div>
+              </div>
+              <div style="margin-top: 1.25rem; display: flex; justify-content: flex-end;">
+                <button class="btn btn-primary" onclick="switchTab('ai-advisor'); runGeminiAnalysis();">
+                  Open AI Advisor Report
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ===================================================================
+           TAB 2: INCOME MANAGEMENT
+           =================================================================== -->
+      <section id="view-income" class="tab-view">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+          <div>
+            <h3>Income Records</h3>
+            <p style="font-size: 0.825rem;">Log salaries, freelancing, investment dividends, and other credits.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openAddIncomeModal()">+ Add Income</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+          <div class="metric-card">
+            <span class="metric-label">Total Month Income</span>
+            <div id="income-month-total" class="metric-value text-positive">₹0.00</div>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Logged Entries</span>
+            <div id="income-record-count" class="metric-value">0 entries</div>
+          </div>
+        </div>
+
+        <div class="card-box">
+          <div class="table-responsive">
+            <table class="finance-table">
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th>Amount (INR)</th>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th style="text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="income-table-tbody">
+                <!-- Rendered by income.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           TAB 3: EXPENSE MANAGEMENT
+           =================================================================== -->
+      <section id="view-expenses" class="tab-view">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
+          <div>
+            <h3>Expense Records</h3>
+            <p style="font-size: 0.825rem;">Track outgoing funds categorized by essentials, housing, and discretionary spending.</p>
+          </div>
+          <div style="display: flex; gap: 0.75rem;">
+            <select id="expense-category-filter" class="form-control" style="width: auto; font-size: 0.8rem; padding: 0.45rem 0.75rem;">
+              <option value="All">All Categories</option>
+              <option value="Food">Food</option>
+              <option value="Rent">Rent</option>
+              <option value="Transport">Transport</option>
+              <option value="Education">Education</option>
+              <option value="Healthcare">Healthcare</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Utilities">Utilities</option>
+              <option value="Other">Other</option>
+            </select>
+            <button class="btn btn-primary" onclick="openAddExpenseModal()">+ Record Expense</button>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+          <div class="metric-card">
+            <span class="metric-label">Total Month Outflow</span>
+            <div id="expense-month-total" class="metric-value text-negative">₹0.00</div>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Filtered Entries</span>
+            <div id="expense-record-count" class="metric-value">0 entries</div>
+          </div>
+        </div>
+
+        <div class="card-box">
+          <div class="table-responsive">
+            <table class="finance-table">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Amount (INR)</th>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th style="text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="expense-table-tbody">
+                <!-- Rendered by expenses.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           TAB 4: BUDGET PLANNER
+           =================================================================== -->
+      <section id="view-budgets" class="tab-view">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+          <div>
+            <h3>Monthly Budget Limits</h3>
+            <p style="font-size: 0.825rem;">Define category spending caps and review variance thresholds in real time.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openSetBudgetModal()">+ Set Category Budget</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+          <div class="metric-card">
+            <span class="metric-label">Total Monthly Budget</span>
+            <div id="budget-total-limit" class="metric-value">₹0.00</div>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Total Budget Remaining</span>
+            <div id="budget-total-remaining" class="metric-value text-positive">₹0.00</div>
+          </div>
+        </div>
+
+        <div id="budget-cards-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem;">
+          <!-- Rendered by budgets.js -->
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           TAB 5: SAVINGS GOALS
+           =================================================================== -->
+      <section id="view-goals" class="tab-view">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+          <div>
+            <h3>Savings Targets</h3>
+            <p style="font-size: 0.825rem;">Track progress towards emergency reserve funds, technology purchases, and milestone targets.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openAddGoalModal()">+ Create Savings Target</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+          <div class="metric-card">
+            <span class="metric-label">Target Milestones Total</span>
+            <div id="goals-total-target" class="metric-value">₹0.00</div>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Current Saved Reserves</span>
+            <div id="goals-total-saved" class="metric-value text-positive">₹0.00</div>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Aggregate Completion</span>
+            <div id="goals-overall-pct" class="metric-value">0% achieved</div>
+          </div>
+        </div>
+
+        <div id="goals-cards-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem;">
+          <!-- Rendered by goals.js -->
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           TAB 6: AI FINANCIAL ADVISOR (GEMINI)
+           =================================================================== -->
+      <section id="view-ai-advisor" class="tab-view">
+        <div class="ai-advisor-panel">
+          <div class="ai-advisor-header">
+            <div class="ai-advisor-title">
+              <h3>Gemini AI Financial Advisor</h3>
+              <p style="font-size: 0.825rem; color: #64748b; margin-top: 0.25rem;">
+                Automated analytical assessment of your current monthly cash flow, category proportions, and budget variance.
+              </p>
+            </div>
+            <button id="btn-run-ai-analysis" class="btn btn-primary" onclick="runGeminiAnalysis()">
+              <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+              </svg>
+              Run Gemini Analysis
+            </button>
+          </div>
+
+          <div id="ai-advisor-results">
+            <div style="text-align: center; padding: 2.5rem 1rem; color: #64748b;">
+              <p style="font-weight: 500; color: #0f172a; margin-bottom: 0.25rem;">Ready to generate financial assessment.</p>
+              <p style="font-size: 0.8rem; margin-bottom: 1.25rem;">Click the button above to analyze your monthly ledger with Google Gemini.</p>
+              <button class="btn btn-secondary btn-sm" onclick="runGeminiAnalysis()">Generate Analysis Now</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           TAB 7: SETTINGS & SYSTEM CONFIGURATION
+           =================================================================== -->
+      <section id="view-settings" class="tab-view">
+        <div style="margin-bottom: 1.25rem;">
+          <h3>System Configuration</h3>
+          <p style="font-size: 0.825rem;">Review deployment environment parameters and manage your local session.</p>
+        </div>
+
+        <div class="card-box">
+          <div class="card-box-header">
+            <h4>Profile Information</h4>
+          </div>
+          <div class="card-box-body">
+            <div style="display: grid; grid-template-columns: 180px 1fr; gap: 0.75rem; font-size: 0.85rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 0.75rem; margin-bottom: 0.75rem;">
+              <span style="color: #64748b; font-weight: 500;">Account Name:</span>
+              <span style="font-weight: 600; color: #0f172a;">{{ user_name }}</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 180px 1fr; gap: 0.75rem; font-size: 0.85rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 0.75rem; margin-bottom: 0.75rem;">
+              <span style="color: #64748b; font-weight: 500;">System Currency:</span>
+              <span style="font-weight: 600; color: #0f172a;">Indian Rupee (INR, ₹)</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 180px 1fr; gap: 0.75rem; font-size: 0.85rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 0.75rem; margin-bottom: 0.75rem;">
+              <span style="color: #64748b; font-weight: 500;">AI Engine:</span>
+              <span style="font-weight: 600; color: #0f172a;">Google Gemini (Model: gemini-3.8-flash)</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 180px 1fr; gap: 0.75rem; font-size: 0.85rem;">
+              <span style="color: #64748b; font-weight: 500;">Storage Backend:</span>
+              <span style="font-family: monospace; font-size: 0.8rem; color: #0f172a;">SQLite (instance/finance.db)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-box">
+          <div class="card-box-header">
+            <h4>Compliance & Legal</h4>
+          </div>
+          <div class="card-box-body" style="display: flex; gap: 1rem; align-items: center;">
+            <a href="/privacy" class="btn btn-secondary btn-sm" target="_blank">View Privacy Policy</a>
+            <a href="/terms" class="btn btn-secondary btn-sm" target="_blank">View Terms & Conditions</a>
+            <a href="/logout" class="btn btn-danger btn-sm">Sign Out</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+</div>
+
+<!-- =======================================================================
+     MODALS
+     ======================================================================= -->
+
+<!-- Modal: Add/Edit Income -->
+<div id="modal-income" class="modal-overlay">
+  <div class="modal-window">
+    <div class="modal-header">
+      <h3 id="income-modal-title">Record Income</h3>
+      <button class="btn-icon" onclick="closeModal('modal-income')">&times;</button>
+    </div>
+    <form id="income-form">
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="income-source">Income Source</label>
+          <select id="income-source" class="form-control" required>
+            <option value="Primary Salary">Primary Salary</option>
+            <option value="Freelance Consulting">Freelance Consulting</option>
+            <option value="Business Operations">Business Operations</option>
+            <option value="Mutual Fund Dividend">Mutual Fund Dividend</option>
+            <option value="Rental Property">Rental Property</option>
+            <option value="Interest Credit">Interest Credit</option>
+            <option value="Other Revenue">Other Revenue</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="income-amount">Amount (INR)</label>
+            <div class="currency-input-wrap">
+              <span class="currency-prefix">₹</span>
+              <input type="number" id="income-amount" class="form-control" step="0.01" min="1" placeholder="50000" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="income-date">Date</label>
+            <input type="date" id="income-date" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="income-description">Description (Optional)</label>
+          <input type="text" id="income-description" class="form-control" placeholder="e.g. Monthly salary credit">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal('modal-income')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Income</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Add/Edit Expense -->
+<div id="modal-expense" class="modal-overlay">
+  <div class="modal-window">
+    <div class="modal-header">
+      <h3 id="expense-modal-title">Record Expense</h3>
+      <button class="btn-icon" onclick="closeModal('modal-expense')">&times;</button>
+    </div>
+    <form id="expense-form">
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="expense-category">Category</label>
+          <select id="expense-category" class="form-control" required>
+            <option value="Food">Food (Groceries & Dining)</option>
+            <option value="Rent">Rent (Housing & Apartment)</option>
+            <option value="Transport">Transport (Metro, Cab, Fuel)</option>
+            <option value="Education">Education (Courses & Books)</option>
+            <option value="Healthcare">Healthcare (Medical & Pharmacy)</option>
+            <option value="Entertainment">Entertainment (Cinema & Subscriptions)</option>
+            <option value="Shopping">Shopping (Clothing & Hardware)</option>
+            <option value="Utilities">Utilities (Electricity, Gas, Broadband)</option>
+            <option value="Other">Other Expenses</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="expense-amount">Amount (INR)</label>
+            <div class="currency-input-wrap">
+              <span class="currency-prefix">₹</span>
+              <input type="number" id="expense-amount" class="form-control" step="0.01" min="1" placeholder="2500" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="expense-date">Date</label>
+            <input type="date" id="expense-date" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="expense-description">Description (Optional)</label>
+          <input type="text" id="expense-description" class="form-control" placeholder="e.g. Monthly supermarket provisions">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal('modal-expense')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Expense</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Set Budget Limit -->
+<div id="modal-budget" class="modal-overlay">
+  <div class="modal-window">
+    <div class="modal-header">
+      <h3>Set Category Budget Limit</h3>
+      <button class="btn-icon" onclick="closeModal('modal-budget')">&times;</button>
+    </div>
+    <form id="budget-form">
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="budget-category">Target Category</label>
+          <select id="budget-category" class="form-control" required>
+            <option value="Food">Food</option>
+            <option value="Rent">Rent</option>
+            <option value="Transport">Transport</option>
+            <option value="Education">Education</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Utilities">Utilities</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="budget-limit">Monthly Limit (INR)</label>
+          <div class="currency-input-wrap">
+            <span class="currency-prefix">₹</span>
+            <input type="number" id="budget-limit" class="form-control" step="100" min="100" placeholder="15000" required>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal('modal-budget')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Set Budget</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Create/Edit Savings Goal -->
+<div id="modal-goal" class="modal-overlay">
+  <div class="modal-window">
+    <div class="modal-header">
+      <h3 id="goal-modal-title">Create Savings Target</h3>
+      <button class="btn-icon" onclick="closeModal('modal-goal')">&times;</button>
+    </div>
+    <form id="goal-form">
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="goal-name">Target Milestone Name</label>
+          <input type="text" id="goal-name" class="form-control" placeholder="e.g. Emergency Fund, Laptop, Travel" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="goal-target-amount">Target Amount (INR)</label>
+            <div class="currency-input-wrap">
+              <span class="currency-prefix">₹</span>
+              <input type="number" id="goal-target-amount" class="form-control" step="100" min="100" placeholder="100000" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="goal-current-amount">Current Saved (INR)</label>
+            <div class="currency-input-wrap">
+              <span class="currency-prefix">₹</span>
+              <input type="number" id="goal-current-amount" class="form-control" step="100" min="0" value="0">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="goal-target-date">Target Milestone Date</label>
+          <input type="date" id="goal-target-date" class="form-control" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal('modal-goal')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Goal</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Deposit to Goal -->
+<div id="modal-deposit" class="modal-overlay">
+  <div class="modal-window">
+    <div class="modal-header">
+      <h3>Add Contribution</h3>
+      <button class="btn-icon" onclick="closeModal('modal-deposit')">&times;</button>
+    </div>
+    <form id="deposit-form">
+      <div class="modal-body">
+        <p id="deposit-goal-name-text" style="font-weight: 600; color: #0f172a; margin-bottom: 1rem;"></p>
+        
+        <div class="form-group">
+          <label class="form-label" for="deposit-amount-input">Contribution Amount (INR)</label>
+          <div class="currency-input-wrap">
+            <span class="currency-prefix">₹</span>
+            <input type="number" id="deposit-amount-input" class="form-control" step="100" min="10" placeholder="5000" required>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem;">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('deposit-amount-input').value = 2000;">+₹2,000</button>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('deposit-amount-input').value = 5000;">+₹5,000</button>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('deposit-amount-input').value = 10000;">+₹10,000</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal('modal-deposit')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Deposit Funds</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script src="{{ url_for('static', filename='js/income.js') }}"></script>
+<script src="{{ url_for('static', filename='js/expenses.js') }}"></script>
+<script src="{{ url_for('static', filename='js/budgets.js') }}"></script>
+<script src="{{ url_for('static', filename='js/goals.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ai-advisor.js') }}"></script>
+
+<script>
+  // Initial startup load
+  document.addEventListener("DOMContentLoaded", () => {
+    // Check URL hash for initial tab
+    const hash = window.location.hash.replace("#", "");
+    if (hash && ["dashboard", "income", "expenses", "budgets", "goals", "ai-advisor", "settings"].includes(hash)) {
+      switchTab(hash);
+    } else {
+      switchTab("dashboard");
+    }
+  });
+</script>
+{% endblock %}
